@@ -18,25 +18,40 @@ def client():
     return app.test_client()
 
 
-# STEP 4: Smoke test the landing page route.
+# STEP 4: Smoke test the landing page and its premium frontend hooks.
 def test_index(client):
     response = client.get("/")
     assert response.status_code == 200
-    assert b"FSCSS" in response.data
+    assert b"AutoStore" in response.data
+    assert b"Sell what you have" in response.data
+    assert b"cdn.tailwindcss.com" not in response.data
+    assert b"/style.css" in response.data
+    assert b"/main.js" in response.data
+    assert b"motion@12.23.24" in response.data
+    assert b"Playfair+Display" in response.data
+    assert b"data-parallax" in response.data
+    assert b"premium-card" in response.data
+    assert b"og:title" in response.data
+    assert b"og-image.png" in response.data
+    assert b"twitter:card" in response.data
+    assert b"favicon.svg" in response.data
+    assert b"rel=\"canonical\"" in response.data
 
 
 # STEP 5: Smoke test the second page to prove url_for links have a target.
 def test_about(client):
     response = client.get("/about")
     assert response.status_code == 200
-    assert b"Project layout" in response.data
+    assert b"Our vision" in response.data
+    assert b"About AutoStore" in response.data
+    assert b"og-about.png" in response.data
 
 
 # STEP 6: Verify the JSON health endpoint returns the exact expected payload.
 def test_health(client):
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.get_json() == {"status": "ok", "service": "Flask + FSCSS boilerplate"}
+    assert response.get_json() == {"status": "ok", "service": "AutoStore"}
 
 
 # STEP 7: Verify the custom 404 template is used and keeps status code 404.
@@ -44,3 +59,18 @@ def test_404(client):
     response = client.get("/missing")
     assert response.status_code == 404
     assert b"off the map" in response.data
+
+
+# STEP 8: Social previews need real, reachable assets at stable public URLs.
+@pytest.mark.parametrize(
+    ("path", "signature"),
+    [
+        ("/og-image.png", b"\x89PNG"),
+        ("/og-about.png", b"\x89PNG"),
+        ("/favicon.svg", b"<svg"),
+    ],
+)
+def test_social_assets(client, path, signature):
+    response = client.get(path)
+    assert response.status_code == 200
+    assert signature in response.data[:32]

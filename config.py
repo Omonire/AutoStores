@@ -8,7 +8,7 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-only-change-me")
 
     # STEP 2.2: APP_NAME is reused in templates and the /health JSON response.
-    APP_NAME = "Flask + FSCSS boilerplate"
+    APP_NAME = "AutoStore"
 
     # STEP 2.3: Reload templates while developing so edits show up immediately.
     TEMPLATES_AUTO_RELOAD = True

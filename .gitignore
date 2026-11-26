@@ -15,5 +15,9 @@ instance/
 # STEP 5: Ignore pytest cache files.
 .pytest_cache/
 
-# STEP 6: Generated CSS is rebuilt from .fscss on app startup, so don't commit it.
+# STEP 6: Generated assets are rebuilt by build.py, so don't commit them.
 static/src/*.css
+public/style.css
+public/main.js
+
+.vercel

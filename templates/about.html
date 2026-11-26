@@ -1,39 +1,81 @@
-{# STEP 1: Inherit the same layout as the home page. #}
+{# STEP 1: Inherit the same FSCSS/Motion layout as the home page. #}
 {% extends "base.html" %}
 
 {# STEP 2: Give this route its own title. #}
-{% block title %}About · Flask + FSCSS{% endblock %}
+{% block title %}About · AutoStore{% endblock %}
+
+{# STEP 2.1: About shares get their own copy and preview image. #}
+{% block meta_description %}Learn the vision behind AutoStore: a trusted marketplace for campus and local trade, built around listings, search and seller contact.{% endblock %}
+{% block og_title %}About AutoStore — A trusted local marketplace{% endblock %}
+{% block og_description %}Six focused building blocks ship first: auth, seller profiles, listings, discovery, seller contact and admin controls.{% endblock %}
+{% block og_image %}{{ url_for('static', filename='og-about.png', _external=True) }}{% endblock %}
+{% block og_image_alt %}AutoStore about page preview showing six MVP building blocks{% endblock %}
+{% block twitter_title %}About AutoStore — A trusted local marketplace{% endblock %}
+{% block twitter_description %}Listings first. Everything else later. See the AutoStore vision and MVP scope.{% endblock %}
+{% block twitter_image %}{{ url_for('static', filename='og-about.png', _external=True) }}{% endblock %}
 
 {# STEP 3: Render the page-specific content inside the base layout. #}
 {% block content %}
-  <section class="hero">
-    <p class="eyebrow">Project layout</p>
-    <h1>Everything you need, <span class="gradient">nothing you don't.</span></h1>
-    <p class="lead">A deliberately small codebase you can grow into a real application.</p>
+  <section class="page-hero" data-reveal-group>
+    <div class="page-hero-aura" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <p data-reveal class="eyebrow">Our vision</p>
+      <h1 data-reveal class="page-title">A trusted marketplace for campus and local trade.</h1>
+      <p data-reveal class="page-lead">AutoStore gives sellers a storefront and buyers one place to discover what is available nearby.</p>
+      <div data-reveal class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('index') }}" data-magnetic>Back to home →</a>
+        <a class="btn btn-secondary" href="{{ url_for('index') }}#how" data-magnetic>How it works</a>
+      </div>
+    </div>
   </section>
 
-  {# STEP 4: One card per folder/file group keeps the explanation scannable. #}
-  <section class="card-grid">
-    <article class="card">
-      <h2>app.py</h2>
-      <p>App factory, routes, error handlers, and FSCSS initialization.</p>
-    </article>
-    <article class="card">
-      <h2>templates/</h2>
-      <p>Base layout, index page, about page, and a custom 404.</p>
-    </article>
-    <article class="card">
-      <h2>static/src/</h2>
-      <p>FSCSS source files. Compiled CSS lands here as a sibling.</p>
-    </article>
-    <article class="card">
-      <h2>tests/</h2>
-      <p>Pytest + Flask test client smoke tests for every route.</p>
-    </article>
+  <section class="section" data-reveal-group>
+    <div class="section-head">
+      <p data-reveal class="eyebrow">MVP scope</p>
+      <h2 data-reveal class="section-title">What we are building first.</h2>
+      <p data-reveal class="section-lead">Six focused building blocks ship before we add anything complicated.</p>
+    </div>
+
+    <div class="scope-grid">
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">01</span>
+        <h3 class="card-title">User authentication</h3>
+        <p class="card-copy">Register and log in as a buyer or seller.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">02</span>
+        <h3 class="card-title">Seller profiles</h3>
+        <p class="card-copy">Students and store owners manage their public profile.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">03</span>
+        <h3 class="card-title">Product listings</h3>
+        <p class="card-copy">Upload images, descriptions, prices and categories.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">04</span>
+        <h3 class="card-title">Discovery and search</h3>
+        <p class="card-copy">Browse, search and filter by product name, category and price.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">05</span>
+        <h3 class="card-title">Seller contact</h3>
+        <p class="card-copy">Buyers enquire before agreeing on payment and collection.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card scope-card">
+        <span class="card-index">06</span>
+        <h3 class="card-title">Admin controls</h3>
+        <p class="card-copy">Manage users, products and reported listings.</p>
+      </article>
+    </div>
   </section>
 
-  {# STEP 5: Send the reader back to the home route. #}
-  <div class="actions">
-    <a class="btn" href="{{ url_for('index') }}">← Back home</a>
-  </div>
+  <section class="cta" data-reveal-group>
+    <div class="cta-aura" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <p data-reveal class="cta-label">Later phases</p>
+      <h2 data-reveal class="cta-title">Payments, delivery and reviews come after validation.</h2>
+      <p data-reveal class="cta-copy">We are starting with simple listings and real conversations between buyers and sellers.</p>
+    </div>
+  </section>
 {% endblock %}

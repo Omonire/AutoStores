@@ -1,17 +1,27 @@
-{# STEP 1: Even the error page uses the shared base template. #}
+{# STEP 1: Even the error page uses the shared FSCSS/Motion base template. #}
 {% extends "base.html" %}
 
 {# STEP 2: Make the browser tab reflect the error. #}
-{% block title %}404 · Flask + FSCSS{% endblock %}
+{% block title %}404 · AutoStore{% endblock %}
 
-{# STEP 3: Friendly message plus a way back into the app. #}
+{# STEP 2.1: Even shared error links get a clean social card. #}
+{% block meta_description %}That AutoStore page went off the map. Return to the marketplace.{% endblock %}
+{% block og_title %}404 · AutoStore{% endblock %}
+{% block og_description %}The route you asked for does not exist in AutoStore.{% endblock %}
+{% block twitter_title %}404 · AutoStore{% endblock %}
+{% block twitter_description %}The route you asked for does not exist in AutoStore.{% endblock %}
+
+{# STEP 3: Friendly message plus a clear way back into the app. #}
 {% block content %}
-  <section class="hero">
-    <p class="eyebrow">Error 404</p>
-    <h1>That page went <span class="gradient">off the map.</span></h1>
-    <p class="lead">The route you asked for doesn't exist in this boilerplate.</p>
-    <div class="actions">
-      <a class="btn" href="{{ url_for('index') }}">Return home</a>
+  <section class="error-page" data-reveal-group>
+    <div class="error-aura" aria-hidden="true"></div>
+    <div class="error-inner">
+      <p data-reveal class="eyebrow">Error 404</p>
+      <h1 data-reveal class="error-title">That page went <span class="text-gold">off the map.</span></h1>
+      <p data-reveal class="error-copy">The route you asked for does not exist in AutoStore. Let's get you back to the marketplace.</p>
+      <div data-reveal class="error-action">
+        <a class="btn btn-primary" href="{{ url_for('index') }}" data-magnetic>Return home →</a>
+      </div>
     </div>
   </section>
 {% endblock %}

@@ -1,42 +1,308 @@
-{# STEP 1: Reuse the shared header, footer, and CSS from base.html. #}
+{# STEP 1: Reuse the FSCSS shell, header, footer and Motion scripts. #}
 {% extends "base.html" %}
 
-{# STEP 2: Override the browser tab title for this page. #}
-{% block title %}Flask + FSCSS boilerplate{% endblock %}
+{# STEP 2: Give the marketing page a clear browser tab title. #}
+{% block title %}AutoStore — Sell what you have. Find what you need.{% endblock %}
+
+{# STEP 2.1: Tailor search results, link previews and social cards for the landing page. #}
+{% block meta_description %}AutoStore connects students, individual sellers and local store owners with buyers in one trusted marketplace.{% endblock %}
+{% block og_title %}AutoStore — Sell what you have. Find what you need.{% endblock %}
+{% block og_description %}List an item, get discovered, and talk to serious buyers on Nigeria's campus and local marketplace.{% endblock %}
+{% block twitter_title %}Sell what you have. Find what you need. | AutoStore{% endblock %}
+{% block twitter_description %}One trusted marketplace for students, store owners and buyers.{% endblock %}
 
 {# STEP 3: Fill the content block defined in base.html. #}
 {% block content %}
-  {# STEP 3.1: Hero section introduces the stack. #}
-  <section class="hero">
-    <p class="eyebrow">Python-first styling</p>
-    <h1>Ship Flask pages with <span class="gradient">shorthand CSS.</span></h1>
-    <p class="lead">
-      A tiny, production-friendly starting point: Flask routes, Jinja templates, and
-      <code>FSCSS</code> compiled automatically into plain CSS on startup.
-    </p>
-    {# STEP 3.2: Both buttons use url_for so Flask builds the correct URLs. #}
-    <div class="actions">
-      <a class="btn" href="{{ url_for('about') }}">See the structure →</a>
-      <a class="btn secondary" href="{{ url_for('health') }}">Check health</a>
+  {# STEP 3.1: Hero pairs editorial type with a CSS-only listing preview and depth motion. #}
+  <section class="hero" id="home" data-parallax>
+    <div class="hero-aura" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div data-animate="hero" class="hero-badge">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Campus &amp; local marketplace
+        </div>
+
+        <h1 data-animate="hero" class="hero-title">
+          Sell what you have.<br />
+          <span class="text-gold">Find what you need.</span>
+        </h1>
+
+        <p data-animate="hero" class="hero-lead">
+          AutoStore brings students, individual sellers and local store owners into one trusted marketplace. List an item, get discovered, and talk to serious buyers.
+        </p>
+
+        {# STEP 3.2: Search posts back to the same page; real filtering lands in a later phase. #}
+        <form data-animate="hero" class="search-panel" action="{{ url_for('index') }}" method="get" role="search">
+          <label class="sr-only" for="heroSearch">Search products</label>
+          <div class="search-field">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input class="hero-input" id="heroSearch" name="q" type="search" placeholder="Search textbooks, phones, fashion…" />
+          </div>
+          <button class="btn btn-primary" type="submit" data-magnetic>Search listings</button>
+        </form>
+
+        <div data-animate="hero" class="quick-tags">
+          <span>Popular:</span>
+          <a class="tag" href="#categories">Textbooks</a>
+          <a class="tag" href="#categories">Phones</a>
+          <a class="tag" href="#categories">Fashion</a>
+          <a class="tag" href="#categories">Hostel items</a>
+        </div>
+
+        <div data-animate="hero" class="hero-actions">
+          <a class="btn btn-primary" href="#categories" data-magnetic>Browse listings →</a>
+          <a class="btn btn-secondary" href="#sell" data-magnetic>Start selling</a>
+        </div>
+
+        <div data-animate="hero" class="proof">
+          <div class="proof-item">
+            <strong class="proof-value" data-count="3">3</strong>
+            <span class="proof-label">user groups</span>
+          </div>
+          <div class="proof-item">
+            <strong class="proof-value" data-count="6">6</strong>
+            <span class="proof-label">launch categories</span>
+          </div>
+          <div class="proof-item">
+            <strong class="proof-value" data-count="1">1</strong>
+            <span class="proof-label">central marketplace</span>
+          </div>
+        </div>
+      </div>
+
+      {# STEP 3.3: Floating chips and a tilted preview card give the hero depth without images. #}
+      <div class="preview-stage">
+        <div data-depth="18" class="float-badge float-one">
+          <span class="badge-dot" aria-hidden="true"></span> 3 user groups
+        </div>
+        <div data-depth="-24" class="float-badge float-two">
+          <span class="badge-dot gold-dot" aria-hidden="true"></span> 6 categories
+        </div>
+
+        <article data-tilt data-animate="hero" class="listing-card" aria-label="Example AutoStore listing">
+          <div class="mock-art">
+            <div class="art-shine" aria-hidden="true"></div>
+            <div class="laptop" aria-hidden="true"></div>
+            <div class="art-caption">
+              <span class="art-wordmark">MBP</span>
+              <span class="art-tag">Fairly used</span>
+            </div>
+          </div>
+
+          <div class="listing-body">
+            <div class="listing-top">
+              <span class="badge-soft">Student seller</span>
+              <span class="listing-meta">UNIBEN</span>
+            </div>
+            <h2 class="listing-title">MacBook Pro 14" — Space Grey</h2>
+            <p class="price">₦125,000</p>
+            <div class="seller">
+              <span class="avatar" aria-hidden="true">CA</span>
+              <span class="seller-copy">
+                <span class="seller-name">Chioma A.</span>
+                <span class="seller-sub">verified seller</span>
+              </span>
+            </div>
+            <button class="btn btn-primary btn-block" type="button" data-magnetic>Contact seller</button>
+          </div>
+        </article>
+
+        <div data-depth="30" class="float-badge float-three">
+          <span class="spark" aria-hidden="true">✦</span> Listed in minutes
+        </div>
+      </div>
     </div>
   </section>
 
-  {# STEP 4: Three cards explain the build flow in plain language. #}
-  <section class="card-grid">
-    <article class="card">
-      <h2>1. Write FSCSS</h2>
-      <p>Edit <code>static/src/style.fscss</code> using variables and shorthands like <code>bg</code>, <code>px</code>, and <code>rounded</code>.</p>
-    </article>
-    <article class="card">
-      <h2>2. Start the app</h2>
-      <p><code>fscss.init_flask(app)</code> compiles every <code>.fscss</code> file next to its <code>.css</code> output.</p>
-    </article>
-    <article class="card">
-      <h2>3. Ship plain CSS</h2>
-      <p>The browser only sees <code>style.css</code>. No runtime dependency in production.</p>
-    </article>
+  {# STEP 4: Trust strip breaks up the hero and hints at the three user groups. #}
+  <section class="trust-strip" data-reveal-group>
+    <div class="trust-inner">
+      <p data-reveal class="trust-label">Built for the way we actually trade</p>
+      <div data-reveal class="trust-points">
+        <span>Student-to-student</span>
+        <span>Local storefronts</span>
+        <span>One searchable catalogue</span>
+      </div>
+    </div>
   </section>
 
-  {# STEP 5: config is injected into every Jinja template by Flask. #}
-  <p class="status"><span class="dot"></span> Server is running on {{ config.APP_NAME }}</p>
+  {# STEP 5: Problem section explains why the marketplace is needed. #}
+  <section class="section" id="problem" data-reveal-group>
+    <div class="section-head">
+      <p data-reveal class="eyebrow">The problem</p>
+      <h2 data-reveal class="section-title">Buying and selling should not depend on word of mouth.</h2>
+      <p data-reveal class="section-lead">Most campus and local trade still happens in scattered WhatsApp groups, statuses and DMs. Useful items stay hidden, and serious buyers never see them.</p>
+    </div>
+
+    <div class="card-grid">
+      <article data-reveal data-tilt class="premium-card">
+        <span class="card-index">01</span>
+        <h3 class="card-title">Students get stuck with unused items</h3>
+        <p class="card-copy">Textbooks, gadgets and hostel belongings sit idle because buyers are hard to find.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card">
+        <span class="card-index">02</span>
+        <h3 class="card-title">Buyers cannot see what is available</h3>
+        <p class="card-copy">They rely on groups and referrals instead of one searchable catalogue.</p>
+      </article>
+      <article data-reveal data-tilt class="premium-card">
+        <span class="card-index">03</span>
+        <h3 class="card-title">Small stores have low visibility</h3>
+        <p class="card-copy">Local retailers need a simple storefront that puts their products in front of buyers.</p>
+      </article>
+    </div>
+  </section>
+
+  {# STEP 6: Category grid maps directly to the initial product scope. #}
+  <section class="section-soft" id="categories" data-reveal-group>
+    <div class="section">
+      <div class="section-head-row">
+        <div class="section-head">
+          <p data-reveal class="eyebrow">Browse by category</p>
+          <h2 data-reveal class="section-title">Start with what people already trade.</h2>
+        </div>
+        <p data-reveal class="section-note">Six focused categories at launch, with room to grow once buyers and sellers trust the flow.</p>
+      </div>
+
+      <div class="category-grid">
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-one">TB</span>
+          <h3 class="category-title">Textbooks</h3>
+          <p class="category-copy">Lecture notes, course texts and study materials.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-two">PH</span>
+          <h3 class="category-title">Phones &amp; Tech</h3>
+          <p class="category-copy">Devices, accessories and everyday gadgets.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-three">FA</span>
+          <h3 class="category-title">Fashion</h3>
+          <p class="category-copy">Clothes, shoes, bags and personal style.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-four">FR</span>
+          <h3 class="category-title">Furniture</h3>
+          <p class="category-copy">Hostel essentials and home pieces.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-five">BT</span>
+          <h3 class="category-title">Beauty</h3>
+          <p class="category-copy">Cosmetics, skincare and personal care.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+        <article data-reveal data-tilt class="category-card">
+          <span class="category-icon cat-six">FD</span>
+          <h3 class="category-title">Food</h3>
+          <p class="category-copy">Local vendors and packaged food items.</p>
+          <span class="category-link">Explore →</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {# STEP 7: The journey mirrors the user flow in the product brief. #}
+  <section class="section" id="how" data-reveal-group>
+    <div class="split">
+      <div>
+        <div class="section-head">
+          <p data-reveal class="eyebrow">How it works</p>
+          <h2 data-reveal class="section-title">From listing to enquiry in a few steps.</h2>
+        </div>
+
+        <ol class="steps">
+          <li data-reveal class="step">
+            <span class="step-num">1</span>
+            <div>
+              <h3 class="step-title">Create a seller profile</h3>
+              <p class="step-copy">Students and store owners sign up and describe what they sell.</p>
+            </div>
+          </li>
+          <li data-reveal class="step">
+            <span class="step-num">2</span>
+            <div>
+              <h3 class="step-title">Upload a product</h3>
+              <p class="step-copy">Add images, description, price, condition and category.</p>
+            </div>
+          </li>
+          <li data-reveal class="step">
+            <span class="step-num">3</span>
+            <div>
+              <h3 class="step-title">Get discovered</h3>
+              <p class="step-copy">Buyers browse, search and filter to find the item they need.</p>
+            </div>
+          </li>
+          <li data-reveal class="step">
+            <span class="step-num">4</span>
+            <div>
+              <h3 class="step-title">Contact the seller</h3>
+              <p class="step-copy">Buyers ask questions, then both sides agree on payment and collection.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <aside data-reveal data-tilt class="flow-card">
+        <div class="flow-glow" aria-hidden="true"></div>
+        <p class="flow-label">MVP focus</p>
+        <h3 class="flow-title">Listings first. Everything else later.</h3>
+        <p class="flow-copy">Authentication, seller profiles, product discovery, search, contact and admin controls come before payments, delivery tracking or reviews.</p>
+        <a class="btn btn-secondary flow-action" href="{{ url_for('about') }}" data-magnetic>See the full scope →</a>
+      </aside>
+    </div>
+  </section>
+
+  {# STEP 8: Audience cards speak directly to the three user groups. #}
+  <section class="section-soft" id="audience" data-reveal-group>
+    <div class="section">
+      <div class="section-head">
+        <p data-reveal class="eyebrow">Built for everyone in the loop</p>
+        <h2 data-reveal class="section-title">One marketplace, three clear roles.</h2>
+      </div>
+
+      <div class="audience-grid">
+        <article data-reveal data-tilt class="audience-card">
+          <p class="audience-label">Sellers</p>
+          <h3 class="audience-title">Students</h3>
+          <p class="audience-copy">Turn books, gadgets and hostel items into cash instead of letting them gather dust.</p>
+          <span class="gold-rule" aria-hidden="true"></span>
+        </article>
+        <article data-reveal data-tilt class="audience-card">
+          <p class="audience-label">Sellers</p>
+          <h3 class="audience-title">Store owners</h3>
+          <p class="audience-copy">Put a small fashion, electronics, food or beauty store online without building a website.</p>
+          <span class="gold-rule" aria-hidden="true"></span>
+        </article>
+        <article data-reveal data-tilt class="audience-card">
+          <p class="audience-label">Buyers</p>
+          <h3 class="audience-title">Customers</h3>
+          <p class="audience-copy">Search one place, compare options, see seller details and make an informed enquiry.</p>
+          <span class="gold-rule" aria-hidden="true"></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {# STEP 9: Closing conversion section uses the warmest brand moment on the page. #}
+  <section class="cta" id="sell" data-reveal-group>
+    <div class="cta-aura" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <p data-reveal class="cta-label">Ready when you are</p>
+      <h2 data-reveal class="cta-title">Your next sale is one listing away.</h2>
+      <p data-reveal class="cta-copy">AutoStore starts simple on purpose: real products, real sellers and real buyers, all in one place.</p>
+      <div data-reveal class="cta-actions">
+        <a class="cta-light" href="{{ url_for('about') }}" data-magnetic>Create a listing →</a>
+        <a class="cta-ghost" href="#home" data-magnetic>Back to top</a>
+      </div>
+    </div>
+  </section>
 {% endblock %}

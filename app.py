@@ -4,24 +4,24 @@ import os
 # STEP 2: Import Flask helpers: the app object, JSON responses, and template rendering.
 from flask import Flask, jsonify, render_template
 
-# STEP 3: Import FSCSS so Python can compile .fscss files into plain .css.
-import fscss
-
-# STEP 4: Import our own settings class from config.py.
+# STEP 3: Import our own settings class from config.py.
 from config import Config
 
 
 # STEP 5: Build the app inside a factory so tests can create fresh instances.
 def create_app(config_class=Config):
-    # STEP 5.1: Create the Flask application object.
-    app = Flask(__name__)
+    # STEP 5.1: Serve CSS and JS from public/ so Vercel can cache them on the CDN.
+    app = Flask(__name__, static_folder="public", static_url_path="")
 
     # STEP 5.2: Copy settings from the config class into app.config.
     app.config.from_object(config_class)
 
-    # STEP 5.3: Compile every .fscss file in static/ into a sibling .css file.
-    # In debug mode this also starts a watcher that recompiles on file changes.
-    fscss.init_flask(app)
+    # STEP 5.3: Locally compile FSCSS into public/style.css before serving.
+    # On Vercel the build command already did this, so runtime skips Node.
+    if not os.getenv("VERCEL"):
+        from build import build_assets
+
+        build_assets()
 
     # STEP 6: Home route renders the landing page template.
     @app.get("/")
