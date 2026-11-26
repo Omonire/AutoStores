@@ -1,16 +1,20 @@
+/* STEP 1: Design tokens live in $variables so colours can be changed once. */
 $accent: #8f6bff;
 $ink: #0b0a13;
 $surface: #151322;
 $muted: #a7a3bb;
 
+/* STEP 2: The bang syntax publishes $accent as a CSS custom property. */
 :root {
   --accent: $accent!;
 }
 
+/* STEP 3: Border-box sizing makes widths predictable. */
 * {
   box-sizing: border-box;
 }
 
+/* STEP 4: Base page typography; bg and ff are FSCSS shorthands. */
 body {
   bg: $ink!;
   color: #f7f5ff;
@@ -19,16 +23,19 @@ body {
   line-height: 1.6;
 }
 
+/* STEP 5: Links inherit colour; decoration is handled per component. */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* STEP 6: Header sits above the page with a subtle divider. */
 .site-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 18px 0;
 }
 
+/* STEP 7: Flex nav keeps the brand left and links right. */
 .nav {
   align-items: center;
   display: flex;
@@ -39,16 +46,19 @@ a {
   padding: 0 4vw;
 }
 
+/* STEP 8: Brand typography. */
 .brand {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.04em;
 }
 
+/* STEP 8.1: Accent the plus sign so the logo has a focal point. */
 .brand span {
   color: var(--accent);
 }
 
+/* STEP 9: Muted nav links with hover feedback. */
 .nav-links {
   color: $muted!;
   display: flex;
@@ -60,17 +70,20 @@ a {
   color: #fff;
 }
 
+/* STEP 10: Main content column is centred and capped at 1120px. */
 .container {
   margin: 0 auto;
   max-width: 1120px;
   padding: 0 4vw 64px;
 }
 
+/* STEP 11: Hero gets generous breathing room above the cards. */
 .hero {
   max-width: 780px;
   padding: 72px 0 48px;
 }
 
+/* STEP 12: Small uppercase label above the headline. */
 .eyebrow {
   color: var(--accent);
   font-size: 11px;
@@ -80,6 +93,7 @@ a {
   text-transform: uppercase;
 }
 
+/* STEP 13: Fluid headline scales from phones to desktops. */
 .hero h1 {
   font-size: clamp(40px, 7vw, 76px);
   letter-spacing: -0.05em;
@@ -87,6 +101,7 @@ a {
   margin: 16px 0;
 }
 
+/* STEP 14: Gradient text is clipped to the glyphs. */
 .gradient {
   background: linear-gradient(100deg, #c4b5fd, #67e8f9);
   background-clip: text;
@@ -94,6 +109,7 @@ a {
   color: transparent;
 }
 
+/* STEP 15: Supporting copy uses the muted token. */
 .lead {
   color: $muted!;
   font-size: 18px;
@@ -101,6 +117,7 @@ a {
   max-width: 620px;
 }
 
+/* STEP 16: Button row wraps on narrow screens. */
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -108,6 +125,7 @@ a {
   margin-top: 28px;
 }
 
+/* STEP 17: Primary button uses FSCSS bg, fw, px, py and rounded shorthands. */
 .btn {
   align-items: center;
   bg: $accent!;
@@ -120,17 +138,20 @@ a {
   rounded: 12px;
 }
 
+/* STEP 17.1: Secondary variant overrides the background only. */
 .btn.secondary {
   bg: #221f33;
   color: #fff;
 }
 
+/* STEP 18: Responsive card grid without media queries. */
 .card-grid {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+/* STEP 19: Card uses stack to create a vertical flex column with a gap. */
 .card {
   bg: $surface!;
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -140,17 +161,20 @@ a {
   stack: 8px;
 }
 
+/* STEP 19.1: Reset heading margins inside cards. */
 .card h2 {
   font-size: 18px;
   margin: 0;
 }
 
+/* STEP 19.2: Card body copy stays smaller and muted. */
 .card p {
   color: $muted!;
   font-size: 14px;
   margin: 0;
 }
 
+/* STEP 20: Inline code gets a soft purple chip. */
 code {
   background: rgba(143, 107, 255, 0.14);
   border-radius: 6px;
@@ -159,6 +183,7 @@ code {
   padding: 2px 6px;
 }
 
+/* STEP 21: Status pill confirms the server is alive. */
 .status {
   align-items: center;
   bg: #12251d;
@@ -173,6 +198,7 @@ code {
   rounded: 999px;
 }
 
+/* STEP 21.1: Small green dot inside the status pill. */
 .dot {
   bg: #4ade80;
   border-radius: 50%;
@@ -180,6 +206,7 @@ code {
   width: 8px;
 }
 
+/* STEP 22: Footer closes the page with the same muted tone. */
 .site-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: $muted!;
@@ -188,6 +215,7 @@ code {
   text-align: center;
 }
 
+/* STEP 23: Motion is opt-in and respects the user's OS preference. */
 @media (prefers-reduced-motion: no-preference) {
   .btn {
     transition: transform 0.2s ease, filter 0.2s ease;

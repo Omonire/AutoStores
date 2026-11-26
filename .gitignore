@@ -1,8 +1,19 @@
+# STEP 1: Ignore Python bytecode folders created at runtime.
 __pycache__/
 *.py[cod]
+
+# STEP 2: Ignore local virtual environments.
 .venv/
 venv/
+
+# STEP 3: Never commit real environment secrets.
 .env
+
+# STEP 4: Ignore Flask instance data.
 instance/
+
+# STEP 5: Ignore pytest cache files.
 .pytest_cache/
+
+# STEP 6: Generated CSS is rebuilt from .fscss on app startup, so don't commit it.
 static/src/*.css

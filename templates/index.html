@@ -1,8 +1,12 @@
+{# STEP 1: Reuse the shared header, footer, and CSS from base.html. #}
 {% extends "base.html" %}
 
+{# STEP 2: Override the browser tab title for this page. #}
 {% block title %}Flask + FSCSS boilerplate{% endblock %}
 
+{# STEP 3: Fill the content block defined in base.html. #}
 {% block content %}
+  {# STEP 3.1: Hero section introduces the stack. #}
   <section class="hero">
     <p class="eyebrow">Python-first styling</p>
     <h1>Ship Flask pages with <span class="gradient">shorthand CSS.</span></h1>
@@ -10,12 +14,14 @@
       A tiny, production-friendly starting point: Flask routes, Jinja templates, and
       <code>FSCSS</code> compiled automatically into plain CSS on startup.
     </p>
+    {# STEP 3.2: Both buttons use url_for so Flask builds the correct URLs. #}
     <div class="actions">
       <a class="btn" href="{{ url_for('about') }}">See the structure →</a>
       <a class="btn secondary" href="{{ url_for('health') }}">Check health</a>
     </div>
   </section>
 
+  {# STEP 4: Three cards explain the build flow in plain language. #}
   <section class="card-grid">
     <article class="card">
       <h2>1. Write FSCSS</h2>
@@ -31,5 +37,6 @@
     </article>
   </section>
 
+  {# STEP 5: config is injected into every Jinja template by Flask. #}
   <p class="status"><span class="dot"></span> Server is running on {{ config.APP_NAME }}</p>
 {% endblock %}

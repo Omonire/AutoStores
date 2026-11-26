@@ -1,7 +1,10 @@
+{# STEP 1: Even the error page uses the shared base template. #}
 {% extends "base.html" %}
 
+{# STEP 2: Make the browser tab reflect the error. #}
 {% block title %}404 · Flask + FSCSS{% endblock %}
 
+{# STEP 3: Friendly message plus a way back into the app. #}
 {% block content %}
   <section class="hero">
     <p class="eyebrow">Error 404</p>

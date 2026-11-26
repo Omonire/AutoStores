@@ -1,7 +1,10 @@
+{# STEP 1: Inherit the same layout as the home page. #}
 {% extends "base.html" %}
 
+{# STEP 2: Give this route its own title. #}
 {% block title %}About · Flask + FSCSS{% endblock %}
 
+{# STEP 3: Render the page-specific content inside the base layout. #}
 {% block content %}
   <section class="hero">
     <p class="eyebrow">Project layout</p>
@@ -9,6 +12,7 @@
     <p class="lead">A deliberately small codebase you can grow into a real application.</p>
   </section>
 
+  {# STEP 4: One card per folder/file group keeps the explanation scannable. #}
   <section class="card-grid">
     <article class="card">
       <h2>app.py</h2>
@@ -28,6 +32,7 @@
     </article>
   </section>
 
+  {# STEP 5: Send the reader back to the home route. #}
   <div class="actions">
     <a class="btn" href="{{ url_for('index') }}">← Back home</a>
   </div>

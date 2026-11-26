@@ -1,3 +1,8 @@
+# STEP 1: The web framework that powers routing, templates, and the dev server.
 Flask>=3.0,<4
+
+# STEP 2: Python wrapper around the official FSCSS Node compiler.
 fscss>=0.1.0
+
+# STEP 3: Test runner used by tests/test_app.py.
 pytest>=8.0,<9
