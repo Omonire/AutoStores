@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Flask + FSCSS{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/style.css') }}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="{{ url_for('index') }}">flask<span>＋</span>fscss</a>
+        <div class="nav-links">
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('health') }}">Health</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">Built with Flask and FSCSS · compiled to plain CSS</footer>
+  </body>
+</html>

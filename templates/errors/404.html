@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}404 · Flask + FSCSS{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <p class="eyebrow">Error 404</p>
+    <h1>That page went <span class="gradient">off the map.</span></h1>
+    <p class="lead">The route you asked for doesn't exist in this boilerplate.</p>
+    <div class="actions">
+      <a class="btn" href="{{ url_for('index') }}">Return home</a>
+    </div>
+  </section>
+{% endblock %}

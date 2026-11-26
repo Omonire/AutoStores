@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Flask + FSCSS boilerplate{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <p class="eyebrow">Python-first styling</p>
+    <h1>Ship Flask pages with <span class="gradient">shorthand CSS.</span></h1>
+    <p class="lead">
+      A tiny, production-friendly starting point: Flask routes, Jinja templates, and
+      <code>FSCSS</code> compiled automatically into plain CSS on startup.
+    </p>
+    <div class="actions">
+      <a class="btn" href="{{ url_for('about') }}">See the structure →</a>
+      <a class="btn secondary" href="{{ url_for('health') }}">Check health</a>
+    </div>
+  </section>
+
+  <section class="card-grid">
+    <article class="card">
+      <h2>1. Write FSCSS</h2>
+      <p>Edit <code>static/src/style.fscss</code> using variables and shorthands like <code>bg</code>, <code>px</code>, and <code>rounded</code>.</p>
+    </article>
+    <article class="card">
+      <h2>2. Start the app</h2>
+      <p><code>fscss.init_flask(app)</code> compiles every <code>.fscss</code> file next to its <code>.css</code> output.</p>
+    </article>
+    <article class="card">
+      <h2>3. Ship plain CSS</h2>
+      <p>The browser only sees <code>style.css</code>. No runtime dependency in production.</p>
+    </article>
+  </section>
+
+  <p class="status"><span class="dot"></span> Server is running on {{ config.APP_NAME }}</p>
+{% endblock %}
